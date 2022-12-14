@@ -1,11 +1,11 @@
 // @ts-ignore
-export function converDate(unixDate) {
+export function convertDate(unixDate) {
   const date = new Date(unixDate * 1000).toLocaleDateString()
   return date
 }
 
 // @ts-ignore
-export function setName(item) {
+export function setRoleName(item) {
   if (item.farmer.fullName) {
     return item.farmer.fullName
   } else if (item.buyer.fullName) {

@@ -1,21 +1,35 @@
-import { useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
+import { roleId } from "../../../constants"
+import { ReturnAction } from "./ReturnAction"
 
-interface ILibrary {
-	status: number[],
-	access: number[],
-	type: string,
-	cb: (orderId: string) => void
+interface IProps {
+	payload: string | null
+	status: number
 }
 
-export const TableActions = () => {
-	const [payload, setPayload] = useState("")
+interface IAction {
+	status: number[]
+	access: number[]
+	element: ReactNode
+}
 
-	const library: ILibrary[] = [
-		{ status: [], access: [], type: "return_order", cb: (orderId) => setPayload(orderId) }
+export const TableActions: React.FC<IProps> = ({ payload, status }) => {
+	const [result, setResult] = useState<IAction[] | null>(null)
+
+	const library: IAction[] = [
+		{ status: [], access: [], element: <ReturnAction orderId={payload} /> }
 	]
-	return (
-		<td>
-			{/* filter by status and access and return TableActionButtons with cb */}
-		</td>
+
+	useEffect(() => {
+		// @ts-ignore
+		const filteredLibrary = library.filter(action => action.status.includes(status) && action.access.includes(roleId))
+		setResult(filteredLibrary)
+	}, [])
+	if (result) return (
+		<div>
+			{/* @ts-ignore */}
+			{result.map((item) => { item.element })}
+		</div>
 	)
+	return null
 }
