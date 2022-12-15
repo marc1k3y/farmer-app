@@ -2,7 +2,7 @@ interface IProps {
   orderId: string | null
 }
 
-export const ReturnAction = ({ orderId }: IProps) => {
+export const CompleteAction = ({ orderId }: IProps) => {
   return (
     <button>return</button>
   )

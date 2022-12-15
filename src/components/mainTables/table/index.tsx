@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { roles } from "../../roles"
 import { TableActions } from "../actions"
 import { convertDate, setRoleName } from "./tools"
@@ -104,28 +104,35 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
     )
   }
 
-  switch (status) {
-    case statusOfTables.pending:
-      // @ts-ignore
-      setCurrentTable({ headers: headers.pending, template: PendingTemplate })
-      break
-    case statusOfTables.inWork:
-      // @ts-ignore
-      setCurrentTable({ headers: headers.inWork, template: InWorkTemplate })
-      break
-    case statusOfTables.completed:
-      // @ts-ignore
-      setCurrentTable({ headers: headers.completed, template: CompletedTemplate })
-      break
-    case statusOfTables.declined:
-      // @ts-ignore
-      setCurrentTable({ headers: headers.declined, template: DeclinedTemplate })
-      break
-    default:
-      // @ts-ignore
-      setCurrentTable({ headers: headers.pending, template: PendingTemplate })
-      break
+  // @ts-ignore
+  function selectTable() {
+    switch (status) {
+      case statusOfTables.pending:
+        // @ts-ignore
+        setCurrentTable({ headers: headers.pending, template: PendingTemplate })
+        break
+      case statusOfTables.inWork:
+        // @ts-ignore
+        setCurrentTable({ headers: headers.inWork, template: InWorkTemplate })
+        break
+      case statusOfTables.completed:
+        // @ts-ignore
+        setCurrentTable({ headers: headers.completed, template: CompletedTemplate })
+        break
+      case statusOfTables.declined:
+        // @ts-ignore
+        setCurrentTable({ headers: headers.declined, template: DeclinedTemplate })
+        break
+      default:
+        // @ts-ignore
+        setCurrentTable({ headers: headers.pending, template: PendingTemplate })
+        break
+    }
   }
+
+  useEffect(() => {
+    selectTable()
+  }, [status])
 
   if (currentTable.template) return (
     <table>
