@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import mainTablesSlice from "./mainTablesSlice"
+import mainTableSlice from "./slice/mainTableSlice"
 
 const rootReducer = combineReducers({
-  mainTables: mainTablesSlice
+  mainTables: mainTableSlice
 })
 
 export const store = configureStore({

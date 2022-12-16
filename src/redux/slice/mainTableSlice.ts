@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost } from "./http"
+import { $authHost } from "../http"
 
 interface IMainTableAPI {
   status: number
@@ -55,7 +55,7 @@ export const fetchDeclined = createAsyncThunk(
   }
 )
 
-const MainTablesSlice: Slice = createSlice({
+const MainTableSlice: Slice = createSlice({
   name: "mainTables",
   initialState: {
     pendingData: [],
@@ -114,4 +114,4 @@ const MainTablesSlice: Slice = createSlice({
   }
 })
 
-export default MainTablesSlice.reducer
+export default MainTableSlice.reducer

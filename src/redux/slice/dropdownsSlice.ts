@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost } from "./http"
+import { $authHost } from "../http"
 
 export const fetchAccountTypes = createAsyncThunk(
   "accountType/get/all",
@@ -25,21 +25,12 @@ export const fetchLocations = createAsyncThunk(
   }
 )
 
-export const fetchTeamNumbers = createAsyncThunk(
-  "get/farmerTeams",
-  async () => {
-    const res = await $authHost.get("farmerAccess/get/teams")
-    return res.data
-  }
-)
-
 const DropdownSlice: Slice = createSlice({
   name: "dropdowns",
   initialState: {
     currencies: [],
     locations: [],
     accountTypes: [],
-    farmerTeams: [],
     loading: false,
     error: null
   },
@@ -76,17 +67,6 @@ const DropdownSlice: Slice = createSlice({
       state.loading = true
     })
     builder.addCase(fetchLocations.rejected, (state, { error }) => {
-      state.error = error.message
-    })
-    // farmer teams
-    builder.addCase(fetchTeamNumbers.fulfilled, (state, { payload }) => {
-      state.farmerTeams = payload
-      state.loading = false
-    })
-    builder.addCase(fetchTeamNumbers.pending, (state) => {
-      state.loading = true
-    })
-    builder.addCase(fetchTeamNumbers.rejected, (state, { error }) => {
       state.error = error.message
     })
   }
