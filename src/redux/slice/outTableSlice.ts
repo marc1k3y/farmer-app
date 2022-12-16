@@ -1,6 +1,23 @@
 import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
 import { $authHost } from "../http"
 
+interface ICreateAR {
+  currencyID: string
+  locationID: string
+  typeID: string
+  quantity: number
+  price: number
+  description: string
+}
+
+const createAccountRequest = createAsyncThunk(
+  "createAccountRequest",
+  async (requestBody: ICreateAR) => {
+    const res = await $authHost.post("accountRequests/create", requestBody)
+    return res
+  }
+)
+
 export const fetchTeamNumber = createAsyncThunk(
   "get/farmerTeams",
   async () => {
@@ -28,8 +45,9 @@ const OutTableSlice: Slice = createSlice({
     hideModal(state) {
       state.modalVisible = false
     },
-    setApprove(state, { payload }) {
-      state.approve = payload
+    setApproveCreate(state, { payload }) {
+      state.approve = payload.status
+      createAccountRequest(payload.requestBody)
     }
   },
   extraReducers: (builder) => {
@@ -48,3 +66,4 @@ const OutTableSlice: Slice = createSlice({
 })
 
 export default OutTableSlice.reducer
+export const { showModal, hideModal, setApproveCreate } = OutTableSlice.actions
