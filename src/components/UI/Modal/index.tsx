@@ -1,29 +1,16 @@
-import { useDispatch } from "react-redux"
-import { setApproveCreate } from "../../../redux/slice/outTableSlice"
+import css from "./style.module.css"
 
-const ApproveRequest = ({ approveTitle }) => {
-  const dispatch = useDispatch()
-
-  function approveHandler() {
-    dispatch(setApproveCreate({ status: true }))
-  }
+export const Modal = ({ visible, setVisible, children }) => {
   return (
-    <div>
-      <div>{approveTitle}</div>
-      <div>
-        <button>cancel</button>
-        <button>approve</button>
+    <div
+      className={css.wrapper}
+      style={{ display: visible ? "flex" : "none" }}
+      onClick={() => setVisible(false)}>
+      <div
+        className={css.content}
+        onClick={(e) => e.stopPropagation()}>
+        {children}
       </div>
-    </div>
-  )
-}
-
-export const Modal = ({ visible, needApprove, approveTitle }) => {
-  return (
-    <div style={{ display: visible ? "flex" : "none" }}>
-      <div>content</div>
-      {needApprove &&
-        <ApproveRequest approveTitle={approveTitle} />}
     </div>
   )
 }

@@ -1,10 +1,14 @@
-export const AccountTypeDropdown: React.FC = ({ options }: object[] | any) => {
+export const AccountTypeDropdown: React.FC<any> = ({ options, currents, setCurrents }) => {
   if (options) return (
-    <select>
+    <select
+      defaultValue={currents.accountType}
+      onChange={(e) => setCurrents({ ...currents, accountType: e.target.value })}>
       {options.map((option) => (
-        <option>{option}</option>
+        <option key={option._id} value={option._id}>
+          {option.name}
+        </option>
       ))}
     </select>
   )
   return null
-} 
+}

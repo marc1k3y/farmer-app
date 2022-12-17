@@ -4,3 +4,4 @@ $to do <br>
 - rename outTable to otherTables <br>
 - inline modal with tableActions <br>
 - for leads positions showing full person info
+

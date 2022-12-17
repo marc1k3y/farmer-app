@@ -1,8 +1,13 @@
-export const CurrencyDropdown: React.FC = ({ options }: object[] | any) => {
+export const CurrencyDropdown: React.FC<any> = ({ options, currents, setCurrents }) => {
   if (options) return (
-    <select>
+    // @ts-ignore
+    <select
+      defaultValue={currents.currency}
+      onChange={(e) => setCurrents({ ...currents, currency: e.target.value })}>
       {options.map((option) => (
-        <option>{option}</option>
+        <option key={option._id} value={option._id}>
+          {option.name}
+        </option>
       ))}
     </select>
   )

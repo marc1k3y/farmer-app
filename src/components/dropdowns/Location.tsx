@@ -1,8 +1,12 @@
-export const LocationDropdown: React.FC = ({ options }: object[] | any) => {
+export const LocationDropdown: React.FC<any> = ({ options, currents, setCurrents }) => {
   if (options) return (
-    <select>
+    <select
+      defaultValue={currents.location}
+      onChange={(e) => setCurrents({ ...currents, location: e.target.value })}>
       {options.map((option) => (
-        <option>{option}</option>
+        <option key={option._id} value={option._id}>
+        {option.iso}
+      </option>
       ))}
     </select>
   )

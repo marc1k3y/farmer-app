@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
 import { $authHost } from "../http"
 
-export const fetchAccountTypes = createAsyncThunk(
+export const fetchAccountTypes: any = createAsyncThunk(
   "accountType/get/all",
   async () => {
     const res = await $authHost.get("accountTypes/get/all")
@@ -9,7 +9,7 @@ export const fetchAccountTypes = createAsyncThunk(
   }
 )
 
-export const fetchCurrencies = createAsyncThunk(
+export const fetchCurrencies: any = createAsyncThunk(
   "currency/get/all",
   async () => {
     const res = await $authHost.get("currency/get/all")
@@ -17,7 +17,7 @@ export const fetchCurrencies = createAsyncThunk(
   }
 )
 
-export const fetchLocations = createAsyncThunk(
+export const fetchLocations: any = createAsyncThunk(
   "location/get/all",
   async () => {
     const res = await $authHost.get("locations/get/all")
@@ -28,9 +28,9 @@ export const fetchLocations = createAsyncThunk(
 const DropdownSlice: Slice = createSlice({
   name: "dropdowns",
   initialState: {
-    currencies: [],
-    locations: [],
-    accountTypes: [],
+    currencies: null,
+    locations: null,
+    accountTypes: null,
     loading: false,
     error: null
   },
