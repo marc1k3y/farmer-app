@@ -4,6 +4,8 @@ import { CurrencyDropdown } from "./Currency"
 import { LocationDropdown } from "./Location"
 import { AccountTypeDropdown } from "./AccountType"
 import { fetchAccountTypes, fetchCurrencies, fetchLocations } from "../../redux/slice/dropdownsSlice"
+import { ErrorWindow } from "../UI/Error"
+import { Loader } from "../UI/Loader"
 
 export const Dropdowns = () => {
   const dispatch = useDispatch()
@@ -36,9 +38,9 @@ export const Dropdowns = () => {
     setDefaultCurrents()
   }, [currencies, locations, accountTypes, currents])
 
-  if (error) return <h1>Error window with message</h1>
-  if (loading) return <h1>Loader</h1>
-  if (currents) return (
+  if (error) return <ErrorWindow message={error} />
+  if (loading) return <Loader />
+  return (
     <div>
       <CurrencyDropdown options={currencies} currents={currents} setCurrents={setCurrents} />
       <LocationDropdown options={locations} currents={currents} setCurrents={setCurrents} />

@@ -46,6 +46,7 @@ const DropdownSlice: Slice = createSlice({
     })
     builder.addCase(fetchAccountTypes.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
     // currency
     builder.addCase(fetchCurrencies.fulfilled, (state, { payload }) => {
@@ -57,6 +58,7 @@ const DropdownSlice: Slice = createSlice({
     })
     builder.addCase(fetchCurrencies.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
     // location
     builder.addCase(fetchLocations.fulfilled, (state, { payload }) => {
@@ -68,6 +70,7 @@ const DropdownSlice: Slice = createSlice({
     })
     builder.addCase(fetchLocations.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
   }
 })

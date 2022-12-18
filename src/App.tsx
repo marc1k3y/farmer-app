@@ -1,12 +1,16 @@
 import "./App.css"
-import { CreateAccountRequestButton } from "./components/outTableActions/CreateAccountRequest"
-import { PeriodSelector } from "./components/PeriodSelector"
+import { useSelector } from "react-redux"
+import { AuthPage } from "./pages/auth"
+import { MainPage } from "./pages/main"
 
 function App() {
+  // @ts-ignore
+  const { isAuth } = useSelector(state => state.auth)
+  console.log(isAuth);
+  
   return (
     <div className="App">
-      {/* <PeriodSelector /> */}
-      <CreateAccountRequestButton />
+      {isAuth ? <MainPage /> : <AuthPage />}
     </div>
   )
 }

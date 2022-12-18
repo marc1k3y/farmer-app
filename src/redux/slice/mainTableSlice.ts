@@ -2,12 +2,11 @@ import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
 import { $authHost } from "../http"
 
 interface IMainTableAPI {
-  status: number
   startDate: string
   endDate: string
 }
 
-export const fetchPending = createAsyncThunk(
+export const fetchPending: any = createAsyncThunk(
   "tableData/get/pending",
   async ({ startDate, endDate }: IMainTableAPI) => {
     const res = await $authHost.get("tableData/get", {
@@ -19,7 +18,7 @@ export const fetchPending = createAsyncThunk(
   }
 )
 
-export const fetchInWork = createAsyncThunk(
+export const fetchInWork: any = createAsyncThunk(
   "tableData/get/inWork",
   async ({ startDate, endDate }: IMainTableAPI) => {
     const res = await $authHost.get("tableData/get", {
@@ -31,7 +30,7 @@ export const fetchInWork = createAsyncThunk(
   }
 )
 
-export const fetchComplete = createAsyncThunk(
+export const fetchComplete: any = createAsyncThunk(
   "tableData/get/complete",
   async ({ startDate, endDate }: IMainTableAPI) => {
     const res = await $authHost.get("tableData/get", {
@@ -43,7 +42,7 @@ export const fetchComplete = createAsyncThunk(
   }
 )
 
-export const fetchDeclined = createAsyncThunk(
+export const fetchDeclined: any = createAsyncThunk(
   "tableData/get/declined",
   async ({ startDate, endDate }: IMainTableAPI) => {
     const res = await $authHost.get("tableData/get", {
@@ -58,10 +57,10 @@ export const fetchDeclined = createAsyncThunk(
 const MainTableSlice: Slice = createSlice({
   name: "mainTables",
   initialState: {
-    pendingData: [],
-    inWorkData: [],
-    completeData: [],
-    declinedData: [],
+    pendingData: null,
+    inWorkData: null,
+    completeData: null,
+    declinedData: null,
     loading: false,
     error: null
   },
@@ -77,6 +76,7 @@ const MainTableSlice: Slice = createSlice({
     })
     builder.addCase(fetchPending.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
     // inWork
     builder.addCase(fetchInWork.fulfilled, (state, { payload }) => {
@@ -88,6 +88,7 @@ const MainTableSlice: Slice = createSlice({
     })
     builder.addCase(fetchInWork.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
     // complete
     builder.addCase(fetchComplete.fulfilled, (state, { payload }) => {
@@ -99,6 +100,7 @@ const MainTableSlice: Slice = createSlice({
     })
     builder.addCase(fetchComplete.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
     // declined
     builder.addCase(fetchDeclined.fulfilled, (state, { payload }) => {
@@ -110,6 +112,7 @@ const MainTableSlice: Slice = createSlice({
     })
     builder.addCase(fetchDeclined.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
   }
 })

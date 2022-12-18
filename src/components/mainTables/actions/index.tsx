@@ -48,15 +48,14 @@ export const TableActions: React.FC<IProps> = ({ payload, status }) => {
 		}
 	]
 
+	// @ts-ignore
+	const filteredLibrary = library.filter(action => action.status.includes(status) && action.access.includes(roleId))
 	useEffect(() => {
-		// @ts-ignore
-		const filteredLibrary = library.filter(action => action.status.includes(status) && action.access.includes(roleId))
 		setResult(filteredLibrary)
-	}, [])
+	}, [filteredLibrary])
 	if (result) return (
 		<div>
-			{/* @ts-ignore */}
-			{result.map((item) => { item.element })}
+			{result.map((item) => item.element)}
 		</div>
 	)
 	return null

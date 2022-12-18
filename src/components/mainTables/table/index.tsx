@@ -3,26 +3,36 @@ import { roles } from "../../roles"
 import { TableActions } from "../actions"
 import { convertDate, setRoleName } from "./tools"
 import { roleId, statusOfTables } from "../../../constants"
+import { useDispatch, useSelector } from "react-redux"
+import { fetchComplete, fetchDeclined, fetchInWork, fetchPending } from "../../../redux/slice/mainTableSlice"
+import { Loader } from "../../UI/Loader"
+import { ErrorWindow } from "../../UI/Error"
 
 interface IProps {
   status: number
 }
 
 export const TableComponent: React.FC<IProps> = ({ status }) => {
+  const dispatch = useDispatch()
+  const emptyPeriod = { startDate: "", endDate: "" } // temp
   // @ts-ignore
-  const { pendingData, inWorkData, completedData, declinedData } = null // temp
+  const { pendingData, inWorkData, completedData, declinedData, loading, error } = useSelector(state => state.mainTables)
   const [currentTable, setCurrentTable] = useState({ headers: {}, template: null })
   const [currentOrder, setCurrentOrder] = useState(null)
 
   const headers = {
-    // @ts-ignore
-    1: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[roleId].roleName, "Описание", "Команда", "Действия"],
-    // @ts-ignore
-    2: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[roleId].roleName, "Описание", "Команда", "Действия"],
-    // @ts-ignore
-    3: ["№", "Дата создания", "Дата закрытия", "Количество", "Валидных", "Цена", "Итого", "Валюта", "Тип аккаунта", "Локация", roles[roleId].roleName, "Описание", "Команда", "Действия"],
+    1: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
+    2: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
+    3: ["№", "Дата создания", "Дата закрытия", "Количество", "Валидных", "Цена", "Итого", "Валюта", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
     4: ["№", "Дата создания", "Дата отмены", "Тип аккаунта", "Локация", "Отменил", "Причина отмены", "Действия"],
   }
+
+  useEffect(() => {
+    dispatch(fetchPending(emptyPeriod))
+    dispatch(fetchInWork(emptyPeriod))
+    dispatch(fetchComplete(emptyPeriod))
+    dispatch(fetchDeclined(emptyPeriod))
+  }, [dispatch, emptyPeriod])
 
   const PendingTemplate = () => {
     if (pendingData) return (
@@ -134,6 +144,8 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
     selectTable()
   }, [status])
 
+  if (loading) return <Loader />
+  if (error) return <ErrorWindow message={error} />
   if (currentTable.template) return (
     <table>
       <thead>
