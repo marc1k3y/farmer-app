@@ -8,11 +8,11 @@ import { UpdateAction } from "./UpdateAction"
 
 interface IProps {
 	payload: string | null
-	status: number
+	status: string
 }
 
 interface IAction {
-	status: number[]
+	status: string[]
 	access: number[]
 	element: JSX.Element
 }

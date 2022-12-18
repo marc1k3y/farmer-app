@@ -3,10 +3,10 @@ export const api = "https://g-go-farming.azurewebsites.net/v2/"
 export const roleId = localStorage.getItem("roleId")
 
 export const statusOfTables = {
-    pending: 0,
-    inWork: 1,
-    completed: 2,
-    declined: 3
+    pending: "0",
+    inWork: "1",
+    completed: "2",
+    declined: "3"
 }
 
 export const tableActionAccess = {
@@ -23,4 +23,14 @@ export const outTableActionAccess = {
     farmerList: [1, 5],
     teamleadList: [1],
     teamManage: [5]
+}
+
+export const workerNameInTableByRole = {
+    1: "Farmer",
+    2: "Buyer",
+    3: "Farmer",
+    4: "Buyer",
+    5: "Farmer",
+    6: "Farmer",
+    7: "Farmer"
 }

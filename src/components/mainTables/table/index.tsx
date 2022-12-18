@@ -4,21 +4,24 @@ import { TableActions } from "../actions"
 import { convertDate, setRoleName } from "./tools"
 import { roleId, statusOfTables } from "../../../constants"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchComplete, fetchDeclined, fetchInWork, fetchPending } from "../../../redux/slice/mainTableSlice"
+import { fetchMainTableByStatus } from "../../../redux/slice/mainTableSlice"
 import { Loader } from "../../UI/Loader"
 import { ErrorWindow } from "../../UI/Error"
 
+const emptyPeriod = { startDate: "", endDate: "" } // temp
+
 interface IProps {
-  status: number
+  status: string
 }
 
 export const TableComponent: React.FC<IProps> = ({ status }) => {
   const dispatch = useDispatch()
-  const emptyPeriod = { startDate: "", endDate: "" } // temp
   // @ts-ignore
   const { pendingData, inWorkData, completedData, declinedData, loading, error } = useSelector(state => state.mainTables)
   const [currentTable, setCurrentTable] = useState({ headers: {}, template: null })
   const [currentOrder, setCurrentOrder] = useState(null)
+
+  console.log(pendingData);
 
   const headers = {
     1: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
@@ -28,10 +31,10 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
   }
 
   useEffect(() => {
-    dispatch(fetchPending(emptyPeriod))
-    dispatch(fetchInWork(emptyPeriod))
-    dispatch(fetchComplete(emptyPeriod))
-    dispatch(fetchDeclined(emptyPeriod))
+    const request = {
+      status: "1", ...emptyPeriod
+    }
+    dispatch(fetchMainTableByStatus(request))
   }, [dispatch, emptyPeriod])
 
   const PendingTemplate = () => {

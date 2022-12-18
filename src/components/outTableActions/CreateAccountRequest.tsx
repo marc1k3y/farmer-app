@@ -32,7 +32,14 @@ const CreateAccountRequestModal = ({ setModal, setApprove, requestBody, setReque
   }
 
   function submitHandler() {
-    setRequestBody(state)
+    setRequestBody({
+      price: parseFloat(state.price),
+      quantity: parseInt(state.quantity),
+      typeID: state.typeID,
+      currencyID: state.currencyID,
+      locationID: state.locationID,
+      description: state.description
+    })
     setModal(false)
     setApprove(true)
   }
