@@ -11,7 +11,7 @@ export const OutTableActions = () => {
 	const [result, setResult] = useState<IAction[] | null>(null)
 
 	const library: IAction[] = [
-		{ access: ["3", "4", "7"], element: <CreateAccountRequestButton /> }
+		{ access: ["1", "3", "4", "7"], element: <CreateAccountRequestButton /> }
 	]
 
 	useEffect(() => {
@@ -19,8 +19,6 @@ export const OutTableActions = () => {
 		const filteredLibrary = library.filter(action => action.access.includes(roleId))
 		setResult(filteredLibrary)
 	}, [])
-	console.log(result);
-
 	if (result) return (
 		<div>
 			{/* @ts-ignore */}

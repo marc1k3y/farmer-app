@@ -23,8 +23,7 @@ const ModalSlice: Slice = createSlice({
   initialState: {
     createdRequestId: null,
     loading: false,
-    error: null,
-    createdRequestId: null
+    error: null
   },
   reducers: {},
   extraReducers: (builder) => {
