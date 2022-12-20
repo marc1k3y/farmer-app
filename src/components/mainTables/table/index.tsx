@@ -138,7 +138,7 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
   useEffect(() => {
     const request = {
       status: "1", ...emptyPeriod
-    }
+    } // temp
     dispatch(fetchMainTableByStatus(request))
   }, [dispatch, emptyPeriod])
 
