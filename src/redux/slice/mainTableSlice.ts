@@ -2,12 +2,6 @@ import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
 import { statusOfTables } from "../../constants";
 import { $authHost } from "../../http"
 
-let currentStatus = statusOfTables.pending
-
-function getKeyByValue(object, value) {
-  return Object.keys(object).find(key => object[key] === value);
-}
-
 interface IMainTableAPI {
   status: "0" | "1" | "2" | "3"
   startDate: string
@@ -17,13 +11,11 @@ interface IMainTableAPI {
 export const fetchMainTableByStatus: any = createAsyncThunk(
   "tableData/get/tableByStatus",
   async ({ status, startDate, endDate }: IMainTableAPI) => {
-    currentStatus = status
     const { data } = await $authHost.get("tableData/get", {
       params: {
         status, startDate, endDate
       }
     })
-    console.log(data);
     return data
   }
 )
@@ -89,9 +81,8 @@ const MainTableSlice: Slice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMainTableByStatus.fulfilled, (state, { payload }) => {
-      const tableData = getKeyByValue(statusOfTables, currentStatus)
-      console.log(tableData);
-      state[tableData] = payload
+      const status = payload.status
+      state[statusOfTables[status]] = payload
     })
     builder.addCase(fetchMainTableByStatus.pending, (state) => {
       state.loading = true

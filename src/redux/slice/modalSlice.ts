@@ -13,14 +13,15 @@ interface ICreateAR {
 export const createAccountRequest = createAsyncThunk(
   "createAccountRequest",
   async (requestBody: ICreateAR) => {
-    const res = await $authHost.post("accountRequests/create", requestBody)
-    return res
+    const {data} = await $authHost.post("accountRequests/create", requestBody)
+    return data
   }
 )
 
 const ModalSlice: Slice = createSlice({
   name: "modalSlice",
   initialState: {
+    createdRequestId: null,
     loading: false,
     error: null,
     createdRequestId: null
@@ -28,8 +29,8 @@ const ModalSlice: Slice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // create account request
-    builder.addCase(createAccountRequest.fulfilled, (state) => {
-      // need set response to createdRequestId
+    builder.addCase(createAccountRequest.fulfilled, (state, {payload}) => {
+      state.createdRequestId = payload
       state.loading = false
     })
     builder.addCase(createAccountRequest.pending, (state) => {
@@ -37,9 +38,9 @@ const ModalSlice: Slice = createSlice({
     })
     builder.addCase(createAccountRequest.rejected, (state, { error }) => {
       state.error = error.message
+      state.loading = false
     })
   }
 })
 
 export default ModalSlice.reducer
-export const { setCreatedRequestId } = ModalSlice.actions
