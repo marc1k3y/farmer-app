@@ -1,44 +1,40 @@
-import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost } from "../http"
-
-export const fetchAccountTypes: any = createAsyncThunk(
-  "accountType/get/all",
-  async () => {
-    const res = await $authHost.get("accountTypes/get/all")
-    return res.data
-  }
-)
-
-export const fetchCurrencies: any = createAsyncThunk(
-  "currency/get/all",
-  async () => {
-    const res = await $authHost.get("currency/get/all")
-    return res.data
-  }
-)
-
-export const fetchLocations: any = createAsyncThunk(
-  "location/get/all",
-  async () => {
-    const res = await $authHost.get("locations/get/all")
-    return res.data
-  }
-)
+import { createSlice, Slice } from "@reduxjs/toolkit"
+import { fetchAccountTypes, fetchCurrencies, fetchLocations } from "../../http/dropdownThunk"
 
 const DropdownSlice: Slice = createSlice({
   name: "dropdowns",
   initialState: {
-    currencies: null,
-    locations: null,
-    accountTypes: null,
+    accountTypes: {
+      currentId: null,
+      all: null
+    },
+    currencies: {
+      currentId: null,
+      all: null
+    },
+    locations: {
+      currentId: null,
+      all: null
+    },
     loading: false,
     error: null
   },
-  reducers: {},
+  reducers: {
+    setCurrentTypeId(state, { payload }) {
+      state.accountTypes.currentId = payload
+    },
+    setCurrentCurrencyId(state, { payload }) {
+      state.currencies.currentId = payload
+    },
+    setCurrentLocationId(state, { payload }) {
+      state.locations.currentId = payload
+    }
+  },
   extraReducers: (builder) => {
-    // accountType
+    //accountType
     builder.addCase(fetchAccountTypes.fulfilled, (state, { payload }) => {
-      state.accountTypes = payload
+      state.accountTypes.all = payload
+      state.accountTypes.currentId = payload[0]["_id"]
       state.loading = false
     })
     builder.addCase(fetchAccountTypes.pending, (state) => {
@@ -48,9 +44,10 @@ const DropdownSlice: Slice = createSlice({
       state.error = error.message
       state.loading = false
     })
-    // currency
+    //currency
     builder.addCase(fetchCurrencies.fulfilled, (state, { payload }) => {
-      state.currencies = payload
+      state.currencies.all = payload
+      state.currencies.currentId = payload[0]["_id"]
       state.loading = false
     })
     builder.addCase(fetchCurrencies.pending, (state) => {
@@ -60,9 +57,10 @@ const DropdownSlice: Slice = createSlice({
       state.error = error.message
       state.loading = false
     })
-    // location
+    //location
     builder.addCase(fetchLocations.fulfilled, (state, { payload }) => {
-      state.locations = payload
+      state.locations.all = payload
+      state.locations.currentId = payload[0]["_id"]
       state.loading = false
     })
     builder.addCase(fetchLocations.pending, (state) => {
@@ -76,3 +74,4 @@ const DropdownSlice: Slice = createSlice({
 })
 
 export default DropdownSlice.reducer
+export const { setCurrentTypeId, setCurrentCurrencyId, setCurrentLocationId } = DropdownSlice.actions

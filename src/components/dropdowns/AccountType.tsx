@@ -1,9 +1,9 @@
-export const AccountTypeDropdown: React.FC<any> = ({ options, currents, setCurrents }) => {
+export const AccountTypeDropdown: React.FC<any> = ({ options, current, setCurrent }) => {
   if (options) return (
     <select
-      defaultValue={currents.accountType}
-      onChange={(e) => setCurrents({ ...currents, accountType: e.target.value })}>
-      {options.map((option) => (
+      defaultValue={current}
+      onChange={(e) => setCurrent(e.target.value)}>
+      {options.map((option, i) => (
         <option key={option._id} value={option._id}>
           {option.name}
         </option>

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost } from "../http"
+import { $authHost } from "../../http"
 
 export const fetchTeamNumber = createAsyncThunk(
   "get/farmerTeams",

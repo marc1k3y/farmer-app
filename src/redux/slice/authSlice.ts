@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost, $host } from "../http"
+import { $authHost, $host } from "../../http"
 
 export const tryAuth: any = createAsyncThunk(
   "auth/login",

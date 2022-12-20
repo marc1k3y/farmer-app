@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
 import { useState } from "react"
 import { statusOfTables } from "../../constants";
-import { $authHost } from "../http"
+import { $authHost } from "../../http"
 
 let currentStatus = statusOfTables.pending
 

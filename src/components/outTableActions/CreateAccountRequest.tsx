@@ -10,14 +10,15 @@ const CreateAccountRequestModal = ({ setModal, setApprove, requestBody, setReque
   const intRegex = new RegExp(/(^\d*$)/)
   const floatRegex = new RegExp(/(^\d*\.?\d*$)/)
 
+  // @ts-ignore
+  const { accountTypes, currencies, locations } = useSelector(state => state.dropdowns)
   const [state, setState] = useState({
     price: "",
     quantity: "",
-    typeID: "",
-    currencyID: "",
-    locationID: "",
     description: ""
   })
+
+  console.log(accountTypes.currentId, currencies.currentId, locations.currentId);
 
   function setPrice(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.value.match(floatRegex)) {
@@ -35,10 +36,10 @@ const CreateAccountRequestModal = ({ setModal, setApprove, requestBody, setReque
     setRequestBody({
       price: parseFloat(state.price),
       quantity: parseInt(state.quantity),
-      typeID: state.typeID,
-      currencyID: state.currencyID,
-      locationID: state.locationID,
-      description: state.description
+      description: state.description,
+      typeID: accountTypes.currentId,
+      currencyID: currencies.currentId,
+      locationID: locations.currentId
     })
     setModal(false)
     setApprove(true)
