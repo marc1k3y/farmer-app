@@ -3,8 +3,6 @@ import { useState } from "react"
 import { statusOfTables } from "../../constants";
 import { $authHost } from "../../http"
 
-let currentStatus = statusOfTables.pending
-
 function getKeyByValue(object, value) {
   return Object.keys(object).find(key => object[key] === value);
 }
@@ -18,9 +16,6 @@ interface IMainTableAPI {
 export const fetchMainTableByStatus: any = createAsyncThunk(
   "tableData/get/tableByStatus",
   async ({ status, startDate, endDate }: IMainTableAPI) => {
-    console.log(status, startDate, endDate);
-    
-    currentStatus = status
     const res = await $authHost.get("tableData/get", {
       params: {
         status, startDate, endDate
@@ -81,18 +76,18 @@ export const fetchMainTableByStatus: any = createAsyncThunk(
 const MainTableSlice: Slice = createSlice({
   name: "mainTables",
   initialState: {
-    pendingData: null,
-    inWorkData: null,
-    completeData: null,
-    declinedData: null,
+    pending: null,
+    inWork: null,
+    complete: null,
+    declined: null,
     loading: false,
     error: null
   },
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchMainTableByStatus.fulfilled, (state, { payload }) => {
-      const tableData = getKeyByValue(statusOfTables, currentStatus)
-      state[tableData] = payload
+      const status = payload.status
+      state[statusOfTables.status] = payload
     })
     builder.addCase(fetchMainTableByStatus.pending, (state) => {
       state.loading = true
