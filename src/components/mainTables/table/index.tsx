@@ -10,35 +10,15 @@ import { ErrorWindow } from "../../UI/Error"
 
 const emptyPeriod = { startDate: "", endDate: "" } // temp
 
-interface IProps {
-  status: string
+const headers = {
+  1: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
+  2: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
+  3: ["№", "Дата создания", "Дата закрытия", "Количество", "Валидных", "Цена", "Итого", "Валюта", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
+  4: ["№", "Дата создания", "Дата отмены", "Тип аккаунта", "Локация", "Отменил", "Причина отмены", "Действия"],
 }
 
-export const TableComponent: React.FC<IProps> = ({ status }) => {
-  const dispatch = useDispatch()
-  // @ts-ignore
-  const { pendingData, inWorkData, completedData, declinedData, loading, error } = useSelector(state => state.mainTables)
-  const [currentTable, setCurrentTable] = useState({ headers: {}, template: null })
-  const [currentOrder, setCurrentOrder] = useState(null)
-
-  console.log(pendingData);
-
-  const headers = {
-    1: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
-    2: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
-    3: ["№", "Дата создания", "Дата закрытия", "Количество", "Валидных", "Цена", "Итого", "Валюта", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
-    4: ["№", "Дата создания", "Дата отмены", "Тип аккаунта", "Локация", "Отменил", "Причина отмены", "Действия"],
-  }
-
-  useEffect(() => {
-    const request = {
-      status: "1", ...emptyPeriod
-    }
-    dispatch(fetchMainTableByStatus(request))
-  }, [dispatch, emptyPeriod])
-
-  const PendingTemplate = () => {
-    if (pendingData) return (
+  const PendingTemplate = (pending) => {
+    if () return (
       // @ts-ignore
       pendingData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
@@ -56,8 +36,8 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
     )
   }
 
-  const InWorkTemplate = () => {
-    if (inWorkData) return (
+  const InWorkTemplate = (inWork) => {
+    if () return (
       // @ts-ignore
       inWorkData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
@@ -75,8 +55,8 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
     )
   }
 
-  const CompletedTemplate = () => {
-    if (completedData) return (
+  const CompletedTemplate = (completed) => {
+    if () return (
       // @ts-ignore
       completedData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
@@ -99,8 +79,8 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
     )
   }
 
-  const DeclinedTemplate = () => {
-    if (declinedData) return (
+  const DeclinedTemplate = (declined) => {
+    if () return (
       // @ts-ignore
       declinedData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
@@ -118,7 +98,7 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
   }
 
   // @ts-ignore
-  function selectTable() {
+  function selectTable(status) {
     switch (status) {
       case statusOfTables.pending:
         // @ts-ignore
@@ -143,13 +123,32 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
     }
   }
 
+interface IProps {
+  status: string
+}
+
+export const TableComponent: React.FC<IProps> = ({ status }) => {
+  const dispatch = useDispatch()
+  // @ts-ignore
+  const { pending, inWork, completed, declined, loading, error } = useSelector(state => state.mainTables)
+  const dataIsReady = pending && inWork && complete && declined
+  const [currentTable, setCurrentTable] = useState({ headers: {}, template: null })
+  const [currentOrder, setCurrentOrder] = useState(null)
+
   useEffect(() => {
-    selectTable()
+    const request = {
+      status: "1", ...emptyPeriod
+    }
+    dispatch(fetchMainTableByStatus(request))
+  }, [dispatch, emptyPeriod])
+
+  useEffect(() => {
+    sselectTable(status)
   }, [status])
 
   if (loading) return <Loader />
   if (error) return <ErrorWindow message={error} />
-  if (currentTable.template) return (
+  if (dataIsReady) return (
     <table>
       <thead>
         <tr>
