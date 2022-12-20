@@ -17,11 +17,11 @@ interface IProps {
 export const TableComponent: React.FC<IProps> = ({ status }) => {
   const dispatch = useDispatch()
   // @ts-ignore
-  const { pendingData, inWorkData, completedData, declinedData, loading, error } = useSelector(state => state.mainTables)
+  const { pending, inWork, completed, declined, loading, error } = useSelector(state => state.mainTables)
   const [currentTable, setCurrentTable] = useState({ headers: {}, template: null })
   const [currentOrder, setCurrentOrder] = useState(null)
 
-  console.log(pendingData);
+  console.log(pending, inWork, completed, declined, loading, error);
 
   const headers = {
     1: ["№", "Дата", "Количество", "Тип аккаунта", "Локация", roles[parseInt(roleId)]["roleName"], "Описание", "Команда", "Действия"],
@@ -32,13 +32,13 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
 
   useEffect(() => {
     const request = {
-      status: "1", ...emptyPeriod
+      status: "0", ...emptyPeriod
     }
     dispatch(fetchMainTableByStatus(request))
   }, [dispatch, emptyPeriod])
 
   const PendingTemplate = () => {
-    if (pendingData) return (
+    if (pending) return (
       // @ts-ignore
       pendingData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
@@ -57,7 +57,7 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
   }
 
   const InWorkTemplate = () => {
-    if (inWorkData) return (
+    if (pending) return (
       // @ts-ignore
       inWorkData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
@@ -76,7 +76,7 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
   }
 
   const CompletedTemplate = () => {
-    if (completedData) return (
+    if (completed) return (
       // @ts-ignore
       completedData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
@@ -100,7 +100,7 @@ export const TableComponent: React.FC<IProps> = ({ status }) => {
   }
 
   const DeclinedTemplate = () => {
-    if (declinedData) return (
+    if (declined) return (
       // @ts-ignore
       declinedData.map((item, index) => (
         <tr key={index} onClick={() => setCurrentOrder(item._id)}>
