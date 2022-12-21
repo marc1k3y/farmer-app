@@ -12,8 +12,6 @@ export const Dropdowns = () => {
   const dispatch = useAppDispatch()
   const { accountTypes, currencies, locations, loading, error } = useAppSelector(state => state.dropdowns)
 
-  console.log("Dropdowns:", accountTypes, currencies, locations, loading, error);
-
   function setTypeID(value: string) {
     dispatch(setCurrentTypeId(value))
   }

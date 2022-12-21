@@ -1,16 +1,14 @@
 import css from "./style.module.css"
 // import logo from "../../assets/logo.png"
 import { FormEvent, useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
 import { Loader } from "../../components/UI/Loader"
-import { checkAuth, tryAuth } from "../../redux/slice/authSlice"
-import { useSelector } from "react-redux"
+import { checkAuth, tryAuth } from "../../http/authThunk"
+import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 // import { ErrorWindow } from "../../components/UI/Error"
 
 export const AuthPage = () => {
-  const dispatch = useDispatch()
-  // @ts-ignore
-  const { loading, error } = useSelector(state => state.auth)
+  const dispatch = useAppDispatch()
+  const { loading, error } = useAppSelector(state => state.auth)
   const [authData, setAuthData] = useState({
     email: "",
     password: ""

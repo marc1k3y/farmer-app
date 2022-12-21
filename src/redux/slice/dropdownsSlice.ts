@@ -1,13 +1,21 @@
 import { createSlice, Slice } from "@reduxjs/toolkit"
 import { fetchAccountTypes, fetchCurrencies, fetchLocations } from "../../http/dropdownThunk"
 
-type dropdownResponse = { _id: string, name: string, iso?: string }
-type dropdownState = { currentId: string, all: dropdownResponse[] }
+interface dropdownResponse {
+  _id: string
+  name: string
+  iso?: string
+}
+
+interface oneOfDropdown {
+  currentId: string
+  all: dropdownResponse[]
+}
 
 interface IState {
-  accountTypes: dropdownState
-  currencies: dropdownState
-  locations: dropdownState
+  accountTypes: oneOfDropdown
+  currencies: oneOfDropdown
+  locations: oneOfDropdown
   loading: boolean
   error?: string
 }

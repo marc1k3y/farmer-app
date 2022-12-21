@@ -13,7 +13,7 @@ interface IApiArgs {
 export const createAccountRequest: any = createAsyncThunk(
   "createAccountRequest",
   async (requestBody: IApiArgs) => {
-    const {data} = await $authHost.post("accountRequests/create", requestBody)
+    const { data } = await $authHost.post("accountRequests/create", requestBody)
     return data
   }
 )

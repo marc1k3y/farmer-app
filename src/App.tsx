@@ -1,11 +1,10 @@
 import "./App.css"
-import { useSelector } from "react-redux"
 import { AuthPage } from "./pages/auth"
 import { MainPage } from "./pages/main"
+import { useAppSelector } from "./hooks/redux"
 
 function App() {
-  // @ts-ignore
-  const { isAuth } = useSelector(state => state.auth)
+  const { isAuth } = useAppSelector(state => state.auth)
 
   return (
     <div className="App">

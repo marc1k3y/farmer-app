@@ -1,9 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { $authHost, $host } from "."
 
+interface IApiArgs {
+  email: string
+  password: string
+}
+
 export const tryAuth: any = createAsyncThunk(
   "auth/login",
-  async (authData) => {
+  async (authData: IApiArgs) => {
     const { data } = await $host.post("auth/login", authData)
     return data
   }

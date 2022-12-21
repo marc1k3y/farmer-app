@@ -1,7 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import { createAccountRequest } from "../../redux/slice/modalSlice"
+import { useAppDispatch, useAppSelector } from "../../hooks/redux"
+import { createAccountRequest } from "../../http/accountRequestActionThunk"
 import { ApproveRequest } from "../approveRequest/ApproveRequest"
 import { Dropdowns } from "../dropdowns"
 import { Modal } from "../UI/Modal"
@@ -10,15 +9,12 @@ const CreateAccountRequestModal = ({ setModal, setApprove, requestBody, setReque
   const intRegex = new RegExp(/(^\d*$)/)
   const floatRegex = new RegExp(/(^\d*\.?\d*$)/)
 
-  // @ts-ignore
-  const { accountTypes, currencies, locations } = useSelector(state => state.dropdowns)
+  const { accountTypes, currencies, locations } = useAppSelector(state => state.dropdowns)
   const [state, setState] = useState({
     price: "",
     quantity: "",
     description: ""
   })
-
-  console.log(accountTypes.currentId, currencies.currentId, locations.currentId);
 
   function setPrice(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.value.match(floatRegex)) {
@@ -72,17 +68,15 @@ const CreateAccountRequestModal = ({ setModal, setApprove, requestBody, setReque
 }
 
 export const CreateAccountRequestButton = () => {
-  const dispatch = useDispatch()
-  // @ts-ignore
-  const { createdRequestId } = useSelector(state => state.modal)
-  console.log("createdRequestId:", createdRequestId);
+  const dispatch = useAppDispatch()
+  const { createdRequestId } = useAppSelector(state => state.modal)
+  console.log("createdRequestId:", createdRequestId)
 
   const [modal, setModal] = useState(false)
   const [approve, setApprove] = useState(false)
   const [requestBody, setRequestBody] = useState(null)
 
   function approveCallback() {
-    // @ts-ignore
     dispatch(createAccountRequest(requestBody))
     setApprove(false)
     console.log("dispatch", requestBody)
