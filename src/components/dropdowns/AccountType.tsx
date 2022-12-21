@@ -1,9 +1,11 @@
-export const AccountTypeDropdown: React.FC<any> = ({ options, current, setCurrent }) => {
+import { IDropdownProps } from "./types"
+
+export const AccountTypeDropdown: React.FC<IDropdownProps> = ({ options, current, setCurrent }) => {
   if (options) return (
     <select
       defaultValue={current}
       onChange={(e) => setCurrent(e.target.value)}>
-      {options.map((option, i) => (
+      {options.map((option) => (
         <option key={option._id} value={option._id}>
           {option.name}
         </option>

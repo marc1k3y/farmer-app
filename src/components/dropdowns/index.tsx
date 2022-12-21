@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 import { CurrencyDropdown } from "./Currency"
 import { LocationDropdown } from "./Location"
 import { AccountTypeDropdown } from "./AccountType"
@@ -9,24 +9,20 @@ import { ErrorWindow } from "../UI/Error"
 import { Loader } from "../UI/Loader"
 
 export const Dropdowns = () => {
-  const dispatch = useDispatch()
-  // @ts-ignore
-  const { accountTypes, currencies, locations, loading, error } = useSelector(state => state.dropdowns)
+  const dispatch = useAppDispatch()
+  const { accountTypes, currencies, locations, loading, error } = useAppSelector(state => state.dropdowns)
 
   console.log("Dropdowns:", accountTypes, currencies, locations, loading, error);
 
-  function setTypeID(value) {
-    // @ts-ignore
+  function setTypeID(value: string) {
     dispatch(setCurrentTypeId(value))
   }
 
-  function setCurrencyID(value) {
-    // @ts-ignore
+  function setCurrencyID(value: string) {
     dispatch(setCurrentCurrencyId(value))
   }
 
-  function setLocationID(value) {
-    // @ts-ignore
+  function setLocationID(value: string) {
     dispatch(setCurrentLocationId(value))
   }
 

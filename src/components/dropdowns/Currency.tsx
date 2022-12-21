@@ -1,6 +1,7 @@
-export const CurrencyDropdown: React.FC<any> = ({ options, current, setCurrent }) => {
+import { IDropdownProps } from "./types"
+
+export const CurrencyDropdown: React.FC<IDropdownProps> = ({ options, current, setCurrent }) => {
   if (options) return (
-    // @ts-ignore
     <select
       defaultValue={current}
       onChange={(e) => setCurrent(e.target.value)}>
