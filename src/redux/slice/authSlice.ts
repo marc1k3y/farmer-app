@@ -1,29 +1,21 @@
-import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost, $host } from "../../http"
+import { createSlice, Slice } from "@reduxjs/toolkit"
+import { checkAuth, tryAuth } from "../../http/authThunk"
 
-export const tryAuth: any = createAsyncThunk(
-  "auth/login",
-  async (authData) => {
-    const res = await $host.post("auth/login", authData)
-    return res.data
-  }
-)
+interface IState {
+  isAuth: boolean
+  loading: boolean
+  error?: string
+}
 
-export const checkAuth: any = createAsyncThunk(
-  "auth/check",
-  async () => {
-    const res = await $authHost.get("auth/check")
-    return res.data
-  }
-)
+const initialState: IState = {
+  isAuth: false,
+  loading: false,
+  error: null
+}
 
 const AuthSlice: Slice = createSlice({
   name: "auth",
-  initialState: {
-    isAuth: false,
-    loading: false,
-    error: null
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     // login

@@ -1,34 +1,25 @@
-import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost } from "../../http"
+import { createSlice, Slice } from "@reduxjs/toolkit"
+import { createAccountRequest } from "../../http/accountRequestActionThunk"
 
-interface ICreateAR {
-  price: number
-  quantity: number
-  typeID: string
-  currencyID: string
-  locationID: string
-  description: string
+interface IState {
+  createdRequestId: string | null
+  loading: boolean
+  error?: string | null
 }
 
-export const createAccountRequest = createAsyncThunk(
-  "createAccountRequest",
-  async (requestBody: ICreateAR) => {
-    const {data} = await $authHost.post("accountRequests/create", requestBody)
-    return data
-  }
-)
+const initialState: IState = {
+  createdRequestId: null,
+  loading: false,
+  error: null
+}
 
 const ModalSlice: Slice = createSlice({
   name: "modalSlice",
-  initialState: {
-    createdRequestId: null,
-    loading: false,
-    error: null
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     // create account request
-    builder.addCase(createAccountRequest.fulfilled, (state, {payload}) => {
+    builder.addCase(createAccountRequest.fulfilled, (state, { payload }) => {
       state.createdRequestId = payload
       state.loading = false
     })

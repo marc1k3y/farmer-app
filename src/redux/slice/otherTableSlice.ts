@@ -1,29 +1,44 @@
-import { createAsyncThunk, createSlice, Slice } from "@reduxjs/toolkit"
-import { $authHost } from "../../http"
+import { createSlice, Slice } from "@reduxjs/toolkit"
+import { fetchTeamNumber } from "../../http/otherTablesThunk"
 
-export const fetchTeamNumber = createAsyncThunk(
-  "get/farmerTeams",
-  async () => {
-    const res = await $authHost.get("farmerAccess/get/teams")
-    return res.data
+interface roleTable {
+  price: number
+  quantity: number
+  total: number
+  uid: {
+    _id: number
+    fullName: string
+    role: number
   }
-)
+  valid: number
+}
+
+interface IState {
+  buyers: roleTable[] | null
+  farmers: roleTable[] | null
+  teamLeads: roleTable[] | null
+  teamNumbers: number[] | null
+  loading: boolean
+  error?: string
+}
+
+const initialState: IState = {
+  buyers: null,
+  farmers: null,
+  teamLeads: null,
+  teamNumbers: null,
+  loading: false,
+  error: null
+}
 
 const OtherTableSlice: Slice = createSlice({
   name: "otherTableSlice",
-  initialState: {
-    buyerData: [],
-    farmerData: [],
-    teamLeadData: [],
-    teamNumberData: [],
-    loading: false,
-    error: null
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     // team manage list
     builder.addCase(fetchTeamNumber.fulfilled, (state, { payload }) => {
-      state.teamNumberData = payload
+      state.teamNumbers = payload
       state.loading = false
     })
     builder.addCase(fetchTeamNumber.pending, (state) => {

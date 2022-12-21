@@ -5,7 +5,7 @@ import { Loader } from "../../UI/Loader"
 import { ErrorWindow } from "../../UI/Error"
 import { getTableNameByStatus } from "./tools"
 import { headers, selectTable } from "./templates"
-import { fetchMainTableByStatus } from "../../../redux/slice/mainTableSlice"
+import { fetchMainTableByStatus } from "../../../redux/slice/mainTablesSlice"
 
 export const TableComponent: React.FC<{ status: string }> = ({ status }) => {
   const dispatch = useDispatch()

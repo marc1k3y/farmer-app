@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import authSlice from "./slice/authSlice"
 import dropdownsSlice from "./slice/dropdownsSlice"
-import mainTableSlice from "./slice/mainTableSlice"
+import mainTableSlice from "./slice/mainTablesSlice"
 import modalSlice from "./slice/modalSlice"
 
 const rootReducer = combineReducers({

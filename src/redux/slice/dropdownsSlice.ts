@@ -1,24 +1,37 @@
 import { createSlice, Slice } from "@reduxjs/toolkit"
 import { fetchAccountTypes, fetchCurrencies, fetchLocations } from "../../http/dropdownThunk"
 
+type dropdownResponse = { _id: string, name: string, iso?: string }
+type dropdownState = { currentId: string, all: dropdownResponse[] }
+
+interface IState {
+  accountTypes: dropdownState
+  currencies: dropdownState
+  locations: dropdownState
+  loading: boolean
+  error?: string
+}
+
+const initialState: IState = {
+  accountTypes: {
+    currentId: null,
+    all: null
+  },
+  currencies: {
+    currentId: null,
+    all: null
+  },
+  locations: {
+    currentId: null,
+    all: null
+  },
+  loading: false,
+  error: null
+}
+
 const DropdownSlice: Slice = createSlice({
   name: "dropdowns",
-  initialState: {
-    accountTypes: {
-      currentId: null,
-      all: null
-    },
-    currencies: {
-      currentId: null,
-      all: null
-    },
-    locations: {
-      currentId: null,
-      all: null
-    },
-    loading: false,
-    error: null
-  },
+  initialState,
   reducers: {
     setCurrentTypeId(state, { payload }) {
       state.accountTypes.currentId = payload
