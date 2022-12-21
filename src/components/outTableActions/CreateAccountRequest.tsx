@@ -1,38 +1,20 @@
-import { ChangeEvent, useEffect, useState } from "react"
+import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 import { createAccountRequest } from "../../http/accountRequestActionThunk"
 import { ApproveRequest } from "../approveRequest/ApproveRequest"
 import { Dropdowns } from "../dropdowns"
+import { PriceInput, QuantityInput, DecriptionInput } from "../UI/Inputs/index"
 import { Modal } from "../UI/Modal"
 
-const CreateAccountRequestModal = ({ setModal, setApprove, requestBody, setRequestBody }) => {
-  const intRegex = new RegExp(/(^\d*$)/)
-  const floatRegex = new RegExp(/(^\d*\.?\d*$)/)
-
+const CreateAccountRequestModal = ({ setModal, setApprove, setRequestBody }) => {
   const { accountTypes, currencies, locations } = useAppSelector(state => state.dropdowns)
-  const [state, setState] = useState({
-    price: "",
-    quantity: "",
-    description: ""
-  })
-
-  function setPrice(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.value.match(floatRegex)) {
-      setState({ ...state, price: e.target.value })
-    }
-  }
-
-  function setQuantity(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.value.match(intRegex)) {
-      setState({ ...state, quantity: e.target.value })
-    }
-  }
+  const { price, quantity, description } = useAppSelector(state => state.modal)
 
   function submitHandler() {
     setRequestBody({
-      price: parseFloat(state.price),
-      quantity: parseInt(state.quantity),
-      description: state.description,
+      price: parseFloat(price),
+      quantity: parseInt(quantity),
+      description: description,
       typeID: accountTypes.currentId,
       currencyID: currencies.currentId,
       locationID: locations.currentId
@@ -41,24 +23,11 @@ const CreateAccountRequestModal = ({ setModal, setApprove, requestBody, setReque
     setApprove(true)
   }
 
-  useEffect(() => {
-    requestBody && setState(requestBody)
-  }, [requestBody])
   return (
     <form>
-      <input
-        type="text"
-        value={state.price || ""}
-        onChange={(e) => setPrice(e)} />
-      <input
-        type="text"
-        value={state.quantity || ""}
-        onChange={(e) => setQuantity(e)} />
-      <textarea
-        cols={25} rows={2}
-        value={state.description}
-        // @ts-ignore
-        onChange={(e) => setState({ ...state, description: e.target.value })} />
+      <PriceInput />
+      <QuantityInput />
+      <DecriptionInput />
       <Dropdowns />
       <button onClick={submitHandler}>
         submit
@@ -90,14 +59,13 @@ export const CreateAccountRequestButton = () => {
         <CreateAccountRequestModal
           setModal={setModal}
           setApprove={setApprove}
-          requestBody={requestBody}
           setRequestBody={setRequestBody} />
       </Modal>
     )
   } else if (approve) {
     return (
       <ApproveRequest
-        title="Submit create account request"
+        title="Submit create account request?"
         setModal={setModal}
         setApprove={setApprove}
         approveCallback={approveCallback} />

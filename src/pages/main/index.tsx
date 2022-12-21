@@ -7,7 +7,7 @@ export const MainPage = () => {
   return (
     <div className={css.wrapper}>
       <OutTableActions />
-      <TableComponent status={statusOfTables.declined} />
+      <TableComponent status={statusOfTables.pending} />
     </div>
   )
 }

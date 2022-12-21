@@ -2,12 +2,20 @@ import { createSlice, Slice } from "@reduxjs/toolkit"
 import { createAccountRequest } from "../../http/accountRequestActionThunk"
 
 interface IState {
+  price: number
+  quantity: number
+  total: number
+  description: string
   createdRequestId: string | null
   loading: boolean
   error?: string | null
 }
 
 const initialState: IState = {
+  price: null,
+  quantity: null,
+  total: null,
+  description: null,
   createdRequestId: null,
   loading: false,
   error: null
@@ -16,7 +24,17 @@ const initialState: IState = {
 const ModalSlice: Slice = createSlice({
   name: "modalSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setPrice(state, { payload }) {
+      state.price = payload
+    },
+    setQuantity(state, { payload }) {
+      state.quantity = payload
+    },
+    setDescription(state, { payload }) {
+      state.description = payload
+    }
+  },
   extraReducers: (builder) => {
     // create account request
     builder.addCase(createAccountRequest.fulfilled, (state, { payload }) => {
@@ -34,3 +52,4 @@ const ModalSlice: Slice = createSlice({
 })
 
 export default ModalSlice.reducer
+export const { setPrice, setQuantity, setDescription } = ModalSlice.actions
