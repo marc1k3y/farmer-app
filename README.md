@@ -5,3 +5,8 @@ $to do <br>
 - for leads positions showing full person info <br>
 - move default dropdowns to redux [x] <br>
 - createApi without thunk ??? <br>
+<br>
+
+doubts <br>
+- modalSlice.ts
+- accountRequestThunk.ts

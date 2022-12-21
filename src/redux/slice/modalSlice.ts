@@ -1,17 +1,21 @@
 import { createSlice, Slice } from "@reduxjs/toolkit"
-import { createAccountRequest } from "../../http/accountRequestActionThunk"
+import { createAccountRequest, fetchOrderInfoById } from "../../http/accountRequestThunk"
 
 interface IState {
   price: number
   quantity: number
   total: number
+  valid?: number // ??
+  team?: number // ??
   description: string
   createdRequestId: string | null
   loading: boolean
-  error?: string | null
+  error?: string
 }
 
 const initialState: IState = {
+  team: null,
+  valid: null,
   price: null,
   quantity: null,
   total: null,
@@ -45,6 +49,20 @@ const ModalSlice: Slice = createSlice({
       state.loading = true
     })
     builder.addCase(createAccountRequest.rejected, (state, { error }) => {
+      state.error = error.message
+      state.loading = false
+    })
+    // fetch order info by id
+    builder.addCase(fetchOrderInfoById.fulfilled, (state, { payload }) => {
+      state.price = payload.price // ??
+      state.valid = payload.valid // ??
+      state.team = payload.team.id // ??
+      state.loading = false
+    })
+    builder.addCase(fetchOrderInfoById.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(fetchOrderInfoById.rejected, (state, { error }) => {
       state.error = error.message
       state.loading = false
     })

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks/redux"
-import { createAccountRequest } from "../../http/accountRequestActionThunk"
+import { createAccountRequest } from "../../http/accountRequestThunk"
 import { ApproveRequest } from "../approveRequest/ApproveRequest"
 import { Dropdowns } from "../dropdowns"
 import { PriceInput, QuantityInput, DecriptionInput } from "../UI/Inputs/index"
