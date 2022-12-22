@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client"
 import { Provider } from "react-redux"
+import { BrowserRouter } from "react-router-dom"
 import App from "./App"
 import { store } from "./redux"
 import reportWebVitals from "./reportWebVitals"
@@ -9,7 +10,9 @@ const root = ReactDOM.createRoot(
 )
 root.render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 )
 

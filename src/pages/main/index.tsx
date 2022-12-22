@@ -1,13 +1,12 @@
 import css from "./style.module.css"
-import { TableComponent } from "../../components/mainTables/table"
-import { statusOfTables } from "../../constants"
 import { OutTableActions } from "../../components/outTableActions"
+import { MainTables } from "../../components/mainTables/MainTables"
 
-export const MainPage = () => {
+export const MainPage: React.FC = () => {
   return (
     <div className={css.wrapper}>
       <OutTableActions />
-      <TableComponent status={statusOfTables.pending} />
+      <MainTables />
     </div>
   )
 }

@@ -6,7 +6,7 @@ import { checkAuth, tryAuth } from "../../http/authThunk"
 import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 // import { ErrorWindow } from "../../components/UI/Error"
 
-export const AuthPage = () => {
+export const AuthPage: React.FC = () => {
   const dispatch = useAppDispatch()
   const { loading, error } = useAppSelector(state => state.auth)
   const [authData, setAuthData] = useState({

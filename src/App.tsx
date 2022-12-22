@@ -1,14 +1,10 @@
 import "./App.css"
-import { AuthPage } from "./pages/auth"
-import { MainPage } from "./pages/main"
-import { useAppSelector } from "./hooks/redux"
+import { AppRouter } from "./Router"
 
 function App() {
-  const { isAuth } = useAppSelector(state => state.auth)
-
   return (
     <div className="App">
-      {isAuth ? <MainPage /> : <AuthPage />}
+      <AppRouter />
     </div>
   )
 }
