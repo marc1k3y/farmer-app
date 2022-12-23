@@ -4,6 +4,6 @@ interface IProps {
 
 export const CancelAction = ({ orderId }: IProps) => {
   return (
-    <button>return</button>
+    <button>cancel</button>
   )
 }

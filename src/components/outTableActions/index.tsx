@@ -8,7 +8,7 @@ interface IAction {
 }
 
 const library: IAction[] = [
-	{ access: ["1", "3", "4", "7"], element: <CreateAccountRequestButton /> }
+	{ access: ["3", "4", "7"], element: <CreateAccountRequestButton /> }
 ]
 const filteredLibrary = library.filter(action => action.access.includes(roleId))
 

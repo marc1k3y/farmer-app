@@ -1,6 +1,5 @@
 import { createSlice, Slice } from "@reduxjs/toolkit"
-import { statusOfTables } from "../../constants"
-import { fetchMainTableByStatus } from "../../http/mainTablesThunk"
+import { fetchTableByStatus } from "../../http/mainTablesThunk"
 
 interface tableBody {
   _id: string
@@ -94,6 +93,8 @@ interface IState {
   declined: tableBody[] | null
   loading: boolean
   error?: string
+  tableStatus?: string
+  currentOrder?: string
 }
 
 const initialState: IState = {
@@ -102,23 +103,31 @@ const initialState: IState = {
   completed: null,
   declined: null,
   loading: false,
-  error: null
+  error: null,
+  tableStatus: null, // temp
+  currentOrder: null
 }
 
 const MainTableSlice: Slice = createSlice({
   name: "mainTables",
   initialState,
-  reducers: {},
+  reducers: {
+    setTableStatus(state, { payload }) {
+      state.tableStatus = payload
+    },
+    setCurrentOrder(state, { payload }) {
+      state.currentOrder = payload
+    }
+  },
   extraReducers: (builder) => {
-    builder.addCase(fetchMainTableByStatus.fulfilled, (state, { payload }) => {
-      const status = payload?.status
-      state[statusOfTables[status]] = payload
+    builder.addCase(fetchTableByStatus.fulfilled, (state, { payload }) => {
+      state[state.tableStatus] = payload
       state.loading = false
     })
-    builder.addCase(fetchMainTableByStatus.pending, (state) => {
+    builder.addCase(fetchTableByStatus.pending, (state) => {
       state.loading = true
     })
-    builder.addCase(fetchMainTableByStatus.rejected, (state, { error }) => {
+    builder.addCase(fetchTableByStatus.rejected, (state, { error }) => {
       state.error = error.message
       state.loading = false
     })
@@ -126,3 +135,4 @@ const MainTableSlice: Slice = createSlice({
 })
 
 export default MainTableSlice.reducer
+export const { setTableStatus, setCurrentOrder } = MainTableSlice.actions

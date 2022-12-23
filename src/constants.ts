@@ -1,4 +1,5 @@
-export const api = "https://g-go-farming.azurewebsites.net/v2/"
+// export const api = "https://g-go-farming.azurewebsites.net/v2/"
+export const api = "http://localhost/v2/"
 
 export const roleId = localStorage.getItem("roleId")
 
@@ -20,11 +21,11 @@ export const statusOfTables = {
 }
 
 export const tableActionAccess = {
-	cancel: [3, 4, 7],
-	complete: [5, 6],
-	return: [1, 2, 3, 4, 5, 6, 7],
-	take: [5, 6],
-	update: [1, 2, 3, 4, 7]
+	cancel: ["3", "4", "7"],
+	complete: ["5", "6"],
+	return: ["1", "2", "3", "4", "5", "6", "7"],
+	take: ["5", "6"],
+	update: ["1", "2", "3", "4", "7"]
 }
 
 export const outTableActionAccess = {
