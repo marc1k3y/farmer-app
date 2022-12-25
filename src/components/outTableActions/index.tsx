@@ -10,12 +10,12 @@ interface IAction {
 const library: IAction[] = [
 	{ access: ["3", "4", "7"], element: <CreateAccountRequestButton /> }
 ]
-const filteredLibrary = library.filter(action => action.access.includes(roleId))
 
 export const OutTableActions = () => {
 	const [result, setResult] = useState<IAction[] | null>(null)
 
 	useEffect(() => {
+		const filteredLibrary = library.filter(action => action.access.includes(roleId))
 		setResult(filteredLibrary)
 	}, [])
 	if (result) return (

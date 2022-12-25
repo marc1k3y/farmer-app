@@ -3,3 +3,25 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.rdp {
+  position: fixed;
+  margin: -5px 0 0 0 !important;
+  color: white;
+}
+
+.rdp-day_selected {
+  background-color: lightgray !important;
+  color: black !important;
+}
+
+/* .rdp-caption_label {
+  color: black !important;
+} */
+
+.rdp-month {
+  background-color: gray;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}

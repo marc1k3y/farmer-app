@@ -55,8 +55,10 @@ const ModalSlice: Slice = createSlice({
     // fetch order info by id
     builder.addCase(fetchOrderInfoById.fulfilled, (state, { payload }) => {
       state.price = payload.price // ??
+      state.quantity = payload.quantity
       state.valid = payload.valid // ??
       state.team = payload.team.id // ??
+      state.description = payload.description
       state.loading = false
     })
     builder.addCase(fetchOrderInfoById.pending, (state) => {

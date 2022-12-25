@@ -1,8 +1,4 @@
-interface IProps {
-  orderId: string | null
-}
-
-export const ReturnAction = ({ orderId }: IProps) => {
+export const ReturnAction = () => {
   return (
     <button>return</button>
   )

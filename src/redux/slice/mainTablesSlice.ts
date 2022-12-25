@@ -86,6 +86,11 @@ interface tableBody {
   valid: number
 }
 
+type periodSelector = {
+  startDate: unknown
+  endDate: unknown
+}
+
 interface IState {
   pending: tableBody[] | null
   inWork: tableBody[] | null
@@ -95,6 +100,7 @@ interface IState {
   error?: string
   tableStatus?: string
   currentOrder?: string
+  period: periodSelector
 }
 
 const initialState: IState = {
@@ -105,7 +111,11 @@ const initialState: IState = {
   loading: false,
   error: null,
   tableStatus: null, // temp
-  currentOrder: null
+  currentOrder: null,
+  period: {
+    startDate: null,
+    endDate: null
+  }
 }
 
 const MainTableSlice: Slice = createSlice({
@@ -117,6 +127,11 @@ const MainTableSlice: Slice = createSlice({
     },
     setCurrentOrder(state, { payload }) {
       state.currentOrder = payload
+    },
+    setPeriod(state, { payload }) {
+      console.log(payload);
+      
+      state.period = payload
     }
   },
   extraReducers: (builder) => {
@@ -135,4 +150,4 @@ const MainTableSlice: Slice = createSlice({
 })
 
 export default MainTableSlice.reducer
-export const { setTableStatus, setCurrentOrder } = MainTableSlice.actions
+export const { setTableStatus, setCurrentOrder, setPeriod } = MainTableSlice.actions

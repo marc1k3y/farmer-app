@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { statusOfTables } from "../../constants"
 import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 import { fetchTableByStatus } from "../../http/mainTablesThunk"
+import { PeriodSelector } from "../PeriodSelector"
 import { ErrorWindow } from "../UI/Error"
 import { Loader } from "../UI/Loader"
 import { TableNavigation } from "./TableNavigation"
@@ -31,6 +32,7 @@ export const MainTables = () => {
   if (error) return <ErrorWindow message={error} />
   return (
     <div>
+      <PeriodSelector />
       <TableNavigation />
       <Routes>
         {routes.map(route => (

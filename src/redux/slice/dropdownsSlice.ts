@@ -1,4 +1,5 @@
 import { createSlice, Slice } from "@reduxjs/toolkit"
+import { fetchOrderInfoById } from "../../http/accountRequestThunk"
 import { fetchAccountTypes, fetchCurrencies, fetchLocations } from "../../http/dropdownThunk"
 
 interface dropdownResponse {
@@ -90,6 +91,17 @@ const DropdownSlice: Slice = createSlice({
     builder.addCase(fetchLocations.rejected, (state, { error }) => {
       state.error = error.message
       state.loading = false
+    })
+    builder.addCase(fetchOrderInfoById.fulfilled, (state, { payload }) => {
+      state.accountTypes.currentId = payload.type._id
+      state.locations.currentId = payload.location._id
+      state.currencies.currentId = payload.currency._id
+    })
+    builder.addCase(fetchOrderInfoById.pending, (state) => {
+      state.loading = true
+    })
+    builder.addCase(fetchOrderInfoById.rejected, (state, { error }) => {
+      state.error = error.message
     })
   }
 })

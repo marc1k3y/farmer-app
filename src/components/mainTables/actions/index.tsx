@@ -18,43 +18,41 @@ interface IAction {
 	element: JSX.Element
 }
 
+const library: IAction[] = [
+	{
+		status: [statusOfTables.pending],
+		access: tableActionAccess.cancel,
+		element: <CancelAction />
+	},
+	{
+		status: [statusOfTables.inWork],
+		access: tableActionAccess.complete,
+		element: <CompleteAction />
+	},
+	{
+		status: [statusOfTables.declined],
+		access: tableActionAccess.return,
+		element: <ReturnAction />
+	},
+	{
+		status: [statusOfTables.pending],
+		access: tableActionAccess.take,
+		element: <TakeAction />
+	},
+	{
+		status: [statusOfTables.pending,
+		statusOfTables.inWork, statusOfTables.completed],
+		access: tableActionAccess.update, element: <UpdateAction />
+	}
+]
+
 export const TableActions: React.FC<IProps> = ({ status, rowId }) => {
 	const [result, setResult] = useState<IAction[] | null>(null)
 	const { currentOrder } = useAppSelector(state => state.mainTables)
 
-	const library: IAction[] = [
-		{
-			status: [statusOfTables.pending],
-			access: tableActionAccess.cancel,
-			element: <CancelAction orderId={currentOrder} />
-		},
-		{
-			status: [statusOfTables.inWork],
-			access: tableActionAccess.complete,
-			element: <CompleteAction orderId={currentOrder} />
-		},
-		{
-			status: [statusOfTables.declined],
-			access: tableActionAccess.return,
-			element: <ReturnAction orderId={currentOrder} />
-		},
-		{
-			status: [statusOfTables.pending],
-			access: tableActionAccess.take,
-			element: <TakeAction orderId={currentOrder} />
-		},
-		{
-			status: [statusOfTables.pending,
-			statusOfTables.inWork, statusOfTables.completed],
-			access: tableActionAccess.update, element: <UpdateAction orderId={currentOrder} />
-		}
-	]
-
 	useEffect(() => {
-		// @ts-ignore
 		const filteredLibrary = library.filter(action => action.status.includes(status) && action.access.includes(roleId))
 		setResult(filteredLibrary)
-		// eslint-disable-next-line
 	}, [status])
 
 	if (result) return (
