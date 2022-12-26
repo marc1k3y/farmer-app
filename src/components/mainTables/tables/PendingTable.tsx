@@ -11,7 +11,7 @@ export const PendingTable: React.FC<{ data: any }> = ({ data }) => {
     dispatch(setCurrentOrder(id))
   }
   if (data) return (
-    <table>
+    <table className="one-table-of-mainTables">
       <thead>
         <tr>
           {headers.map((item: any, i: number) => (

@@ -87,8 +87,8 @@ interface tableBody {
 }
 
 type periodSelector = {
-  startDate: unknown
-  endDate: unknown
+  from: unknown
+  to: unknown
 }
 
 interface IState {
@@ -113,8 +113,8 @@ const initialState: IState = {
   tableStatus: null, // temp
   currentOrder: null,
   period: {
-    startDate: null,
-    endDate: null
+    from: null,
+    to: null
   }
 }
 
@@ -129,8 +129,6 @@ const MainTableSlice: Slice = createSlice({
       state.currentOrder = payload
     },
     setPeriod(state, { payload }) {
-      console.log(payload);
-      
       state.period = payload
     }
   },
