@@ -1,4 +1,7 @@
-doubts <br>
-- modalSlice.ts
-- accountRequestThunk.ts
-- TableActions index
+farmer app v2
+- Typescript
+- redux-toolkir
+
+todo
+- period reset
+- period endDate !< startDate
