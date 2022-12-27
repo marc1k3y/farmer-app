@@ -3,12 +3,14 @@ import authSlice from "./slice/authSlice"
 import dropdownsSlice from "./slice/dropdownsSlice"
 import mainTableSlice from "./slice/mainTablesSlice"
 import modalSlice from "./slice/modalSlice"
+import otherTableSlice from "./slice/otherTableSlice"
 
 const rootReducer = combineReducers({
   auth: authSlice,
   mainTables: mainTableSlice,
   dropdowns: dropdownsSlice,
   modal: modalSlice,
+  otherTable: otherTableSlice
 })
 
 export const store = configureStore({

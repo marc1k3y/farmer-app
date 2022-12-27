@@ -8,6 +8,7 @@ import { PeriodSelector } from "../PeriodSelector"
 import { Loader } from "../UI/Loader"
 import { TableNavigation } from "./TableNavigation"
 import { PendingTable, InWorkTable, CompletedTable, DeclinedTable } from "./tables/index"
+import { createPeriodForRequest } from "../../tools"
 
 export const MainTables = () => {
   const dispatch = useAppDispatch()
@@ -25,8 +26,7 @@ export const MainTables = () => {
   ]
   useEffect(() => {
     const currentTable = pathname.split("/")[2]
-    const startDate = period.from?.toISOString().split('T')[0]
-    const endDate = period.to?.toISOString().split('T')[0]
+    const { startDate, endDate } = createPeriodForRequest(period)
     const request = {
       status: statusOfTables[currentTable], startDate, endDate
     }

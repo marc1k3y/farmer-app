@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { roleId } from "../../constants"
+import { BuyerListButton } from "./BuyerList"
 import { CreateAccountRequestButton } from "./CreateAccountRequest"
+import { FarmerListButton } from "./FarmerList"
+import { TeamleadListButton } from "./TeamleadList"
+import { TeamManageButton } from "./TeamManageList"
 
 interface IAction {
 	access: string[]
@@ -8,7 +12,11 @@ interface IAction {
 }
 
 const library: IAction[] = [
-	{ access: ["3", "4", "7"], element: <CreateAccountRequestButton /> }
+	{ access: ["1", "2"], element: <BuyerListButton /> },
+	{ access: ["3", "4", "7"], element: <CreateAccountRequestButton /> },
+	{ access: ["1"], element: <FarmerListButton /> },
+	{ access: ["1"], element: <TeamleadListButton /> },
+	{ access: ["5"], element: <TeamManageButton /> },
 ]
 
 export const OutTableActions = () => {

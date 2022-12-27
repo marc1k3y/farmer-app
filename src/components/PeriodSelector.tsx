@@ -18,10 +18,6 @@ export const PeriodSelector = () => {
     dispatch(setPeriod(payload))
   }
 
-  // useEffect(() => {
-  //   setPeriodHandler({ from: today, to: today })
-  // }, [])
-
   return (
     <div style={{ position: "relative" }}>
       <button onClick={() => setIsOpen(!isOpen)} style={{

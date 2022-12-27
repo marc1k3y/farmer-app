@@ -1,7 +1,7 @@
 import { useAppDispatch } from "../../../hooks/redux"
 import { setCurrentOrder } from "../../../redux/slice/mainTablesSlice"
 import { TableActions } from "../actions"
-import { formatUnixDate } from "./tools"
+import { formatUnixDate } from "../../../tools"
 
 export const DeclinedTable: React.FC<{ data: any }> = ({ data }) => {
   const headers = ["№", "Дата создания", "Дата отмены", "Тип аккаунта", "Локация", "Отменил", "Причина отмены", "Действия"]

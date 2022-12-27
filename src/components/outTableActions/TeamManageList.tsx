@@ -1,6 +1,6 @@
 const TeamManageButton = () => {
   return (
-    <button>Create account request</button>
+    <button>Open team manage</button>
   )
 }
 

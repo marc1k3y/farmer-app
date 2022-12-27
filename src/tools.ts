@@ -13,6 +13,12 @@ export function setRoleName(item: any) {
   }
 }
 
-export function getTableNameByStatus(object: any, status: any) {
-  return Object.keys(object).find(key => object[key] === status)
+export function createPeriodForRequest(period) {
+  const startDate = period.from?.toISOString().split('T')[0]
+  const endDate = period.to?.toISOString().split('T')[0]
+  return { startDate, endDate }
 }
+
+// export function getTableNameByStatus(object: any, status: any) {
+//   return Object.keys(object).find(key => object[key] === status)
+// }
