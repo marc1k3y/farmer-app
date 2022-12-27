@@ -1,5 +1,7 @@
+import { useEffect } from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
-import { useAppSelector } from "./hooks/redux"
+import { useAppDispatch, useAppSelector } from "./hooks/redux"
+import { checkAuth } from "./http/authThunk"
 import { AuthPage } from "./pages/auth"
 import { MainPage } from "./pages/main/index"
 
@@ -14,7 +16,12 @@ const publicRoutes = [
 ]
 
 export const AppRouter = () => {
+  const dispatch = useAppDispatch()
   const { isAuth } = useAppSelector(state => state.auth)
+
+  useEffect(() => {
+    dispatch(checkAuth())
+  }, [dispatch])
   return (
     <Routes>
       {isAuth

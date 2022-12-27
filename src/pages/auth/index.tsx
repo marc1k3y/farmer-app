@@ -1,8 +1,8 @@
 import css from "./style.module.css"
 // import logo from "../../assets/logo.png"
-import { FormEvent, useEffect, useState } from "react"
+import { FormEvent, useState } from "react"
 import { Loader } from "../../components/UI/Loader"
-import { checkAuth, tryAuth } from "../../http/authThunk"
+import { tryAuth } from "../../http/authThunk"
 import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 // import { ErrorWindow } from "../../components/UI/Error"
 
@@ -18,10 +18,6 @@ export const AuthPage: React.FC = () => {
     e.preventDefault()
     dispatch(tryAuth(authData))
   }
-
-  useEffect(() => {
-    dispatch(checkAuth())
-  }, [dispatch])
 
   if (loading) return <Loader />
   if (error) console.log(error)
