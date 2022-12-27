@@ -15,8 +15,9 @@ const BuyerListModal = () => {
   console.log(buyers);
 
   if (buyers) return (
-    <div></div>
+    <div>{buyers} ready for maps</div>
   )
+  return null
 }
 
 export const BuyerListButton = () => {

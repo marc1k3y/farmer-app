@@ -11,12 +11,13 @@ const TeamleadListModal = () => {
   const { teamLeads } = useAppSelector(state => state.otherTable)
   useEffect(() => {
     dispatch(fetchTeamleadListTable(startDate, endDate))
-  }, [])
+  }, [dispatch, startDate, endDate])
   console.log(teamLeads);
 
-  return (
-    <div></div>
+  if (teamLeads) return (
+    <div>{teamLeads} team leads ready for render</div>
   )
+  return null
 }
 
 export const TeamleadListButton = () => {

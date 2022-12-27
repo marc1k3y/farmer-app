@@ -1,5 +1,5 @@
 import { createSlice, Slice } from "@reduxjs/toolkit"
-import { fetchBuyerListTable, fetchFarmerListTable, fetchFarmersForTeamManage, fetchTeamleadListTable, fetchTeamNumber } from "../../http/otherTablesThunk"
+import { fetchBuyerListTable, fetchFarmerListTable, fetchFarmersForTeamManage, fetchTeamleadListTable, fetchTeamNumbers } from "../../http/otherTablesThunk"
 
 interface roleTable {
   price: number
@@ -65,14 +65,14 @@ const OtherTableSlice: Slice = createSlice({
       state.loading = false
     })
     // team manage list
-    builder.addCase(fetchTeamNumber.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchTeamNumbers.fulfilled, (state, { payload }) => {
       state.teamNumbers = payload
       state.loading = false
     })
-    builder.addCase(fetchTeamNumber.pending, (state) => {
+    builder.addCase(fetchTeamNumbers.pending, (state) => {
       state.loading = true
     })
-    builder.addCase(fetchTeamNumber.rejected, (state, { error }) => {
+    builder.addCase(fetchTeamNumbers.rejected, (state, { error }) => {
       state.error = error.message
       state.loading = false
     })

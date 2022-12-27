@@ -4,20 +4,6 @@ import { fetchFarmerListTable } from "../../http/otherTablesThunk"
 import { createPeriodForRequest } from "../../tools"
 import { Modal } from "../UI/Modal"
 
-export const FarmerListButton = () => {
-  const [modal, setModal] = useState(false)
-  if (modal) return (
-    <Modal visible={modal} setVisible={setModal}>
-      <FarmerListModal />
-    </Modal>
-  )
-  return (
-    <button onClick={() => setModal(true)}>
-      Open farmer list
-    </button>
-  )
-}
-
 const FarmerListModal = () => {
   const dispatch = useAppDispatch()
   const { period } = useAppSelector(state => state.mainTables)
@@ -29,6 +15,21 @@ const FarmerListModal = () => {
   console.log(farmers);
 
   if (farmers) return (
-    <div></div>
+    <div>{farmers} farmers ready for render</div>
+  )
+  return null
+}
+
+export const FarmerListButton = () => {
+  const [modal, setModal] = useState(false)
+  if (modal) return (
+    <Modal visible={modal} setVisible={setModal}>
+      <FarmerListModal />
+    </Modal>
+  )
+  return (
+    <button onClick={() => setModal(true)}>
+      Open farmer list
+    </button>
   )
 }
