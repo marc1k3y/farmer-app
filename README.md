@@ -1,7 +1,8 @@
-farmer app v2
-- Typescript
-- redux-toolkir
+## farmer app v2 ##
+#### [react, typescript, redux-toolkit] ####
 
-todo
+NEED DO
 - period reset
 - period endDate !< startDate
+- show period selector only in table
+- update tables after changes

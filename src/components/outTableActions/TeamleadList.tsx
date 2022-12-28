@@ -15,7 +15,7 @@ const TeamleadListModal = () => {
   console.log(teamLeads);
 
   if (teamLeads) return (
-    <div>{teamLeads} team leads ready for render</div>
+    <div className="outTableModal-wrapper">{teamLeads} team leads ready for render</div>
   )
   return null
 }

@@ -49,16 +49,22 @@ export const fetchFarmersForTeamManage: any = createAsyncThunk(
   }
 )
 
-export const addAllAccessTeamManage: any = async (farmer: any) => {
-  const { data } = await $authHost.put("farmerAccess/add/all",
-    { farmer }
-  )
-  return data
-}
+export const addAllAccessTeamManage: any = createAsyncThunk(
+  "farmerAccess/add/all",
+  async (farmer: any) => {
+    const { data } = await $authHost.put("farmerAccess/add/all", {
+      farmer
+    })
+    return data
+  }
+)
 
-export const revokeAllAccessTeamManage: any = async (farmer: any) => {
-  const { data } = await $authHost.put("farmerAccess/revoke/all",
-    { farmer }
-  )
-  return data
-}
+export const revokeAllAccessTeamManage: any = createAsyncThunk(
+  "farmerAccess/revoke/all",
+  async (farmer: any) => {
+    const { data } = await $authHost.put("farmerAccess/revoke/all", {
+      farmer
+    })
+    return data
+  }
+)

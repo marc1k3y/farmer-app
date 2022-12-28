@@ -15,7 +15,7 @@ const BuyerListModal = () => {
   console.log(buyers);
 
   if (buyers) return (
-    <div>{buyers} ready for maps</div>
+    <div className="outTableModal-wrapper">{buyers} ready for maps</div>
   )
   return null
 }
