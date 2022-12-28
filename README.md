@@ -1,4 +1,4 @@
-## farmer app v2 ## [react, typescript, redux-toolkit] ####
+## farmer app v2 ##
 
 NEED DO
 - period reset
@@ -8,3 +8,5 @@ NEED DO
 - error handler with ui
 - wrap farmer app to global app
 - make privateRoutes[appName]
+
+<sub>[react, typescript, redux-toolkit]</sub>
