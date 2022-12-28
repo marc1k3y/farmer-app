@@ -21,11 +21,6 @@ const AuthSlice: Slice = createSlice({
     // login
     builder.addCase(tryAuth.fulfilled, (state, { payload }) => {
       state.isAuth = true
-      localStorage.setItem("token", payload.token)
-      localStorage.setItem("username", payload.username)
-      localStorage.setItem("roleId", payload.roleID)
-      localStorage.setItem("teamId", payload.teamID)
-      localStorage.setItem("userId", payload.userID)
       state.loading = false
     })
     builder.addCase(tryAuth.pending, (state) => {

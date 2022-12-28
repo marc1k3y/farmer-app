@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { roleId } from "../../constants"
 import { BuyerListButton } from "./BuyerList"
 import { CreateAccountRequestButton } from "./CreateAccountRequest"
 import { FarmerListButton } from "./FarmerList"
@@ -23,7 +22,7 @@ export const OutTableActions = () => {
 	const [result, setResult] = useState<IAction[] | null>(null)
 
 	useEffect(() => {
-		const filteredLibrary = library.filter(action => action.access.includes(roleId))
+		const filteredLibrary = library.filter(action => action.access.includes(localStorage.getItem("roleId")))
 		setResult(filteredLibrary)
 	}, [])
 	if (result) return (

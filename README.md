@@ -5,6 +5,7 @@ NEED DO
 - period endDate !< startDate
 - show period selector only in table
 - update tables after changes
+- update out table actions on login
 - error handler with ui
 - wrap farmer app to global app
 - make privateRoutes[appName]

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { roleId, statusOfTables, tableActionAccess } from "../../../constants"
+import { uid, statusOfTables, tableActionAccess } from "../../../constants"
 import { useAppSelector } from "../../../hooks/redux"
 import { CancelAction } from "./CancelAction"
 import { CompleteAction } from "./CompleteAction"
@@ -51,7 +51,7 @@ export const TableActions: React.FC<IProps> = ({ status, rowId }) => {
 	const { currentOrder } = useAppSelector(state => state.mainTables)
 
 	useEffect(() => {
-		const filteredLibrary = library.filter(action => action.status.includes(status) && action.access.includes(roleId))
+		const filteredLibrary = library.filter(action => action.status.includes(status) && action.access.includes(uid.roleId))
 		setResult(filteredLibrary)
 	}, [status])
 

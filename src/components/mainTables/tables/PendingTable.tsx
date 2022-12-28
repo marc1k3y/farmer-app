@@ -1,11 +1,11 @@
-import { roleId, workerNameInTableByRole } from "../../../constants"
+import { uid, workerNameInTableByRole } from "../../../constants"
 import { useAppDispatch } from "../../../hooks/redux"
 import { setCurrentOrder } from "../../../redux/slice/mainTablesSlice"
 import { TableActions } from "../actions"
 import { formatUnixDate, setRoleName } from "../../../tools"
 
 export const PendingTable: React.FC<{ data: any }> = ({ data }) => {
-  const headers = ["№", "Дата", "Количество", "Тип аккаунта", "Локация", workerNameInTableByRole[roleId], "Описание", "Команда"]
+  const headers = ["№", "Дата", "Количество", "Тип аккаунта", "Локация", workerNameInTableByRole[uid.roleId], "Описание", "Команда"]
   const dispatch = useAppDispatch()
   function setOrderId(id) {
     dispatch(setCurrentOrder(id))

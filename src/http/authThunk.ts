@@ -10,6 +10,11 @@ export const tryAuth: any = createAsyncThunk(
   "auth/login",
   async (authData: IApiArgs) => {
     const { data } = await $host.post("auth/login", authData)
+    localStorage.setItem("token", data.token)
+    localStorage.setItem("username", data.username)
+    localStorage.setItem("roleId", data.roleID)
+    localStorage.setItem("teamId", data.teamID)
+    localStorage.setItem("userId", data.userID)
     return data
   }
 )
