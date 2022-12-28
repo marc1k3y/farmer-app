@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks/redux"
-import { fetchFarmersForTeamManage, fetchTeamNumbers } from "../../http/otherTablesThunk"
+import {
+  fetchFarmersForTeamManage, fetchTeamNumbers,
+  // addAllAccessTeamManage, revokeAllAccessTeamManage
+} from "../../http/otherTablesThunk"
 import { createPeriodForRequest } from "../../tools"
 import { Modal } from "../UI/Modal"
 
@@ -16,9 +19,19 @@ const TeamManageModal = () => {
   }, [dispatch, startDate, endDate])
   console.log(farmersForTeamManage, teamNumbers);
 
+  // function addAllTeamHandler(farmer: any) {
+  //   dispatch(addAllAccessTeamManage(farmer))
+  // }
+
+  // function revokeAllTeamHandler(farmer: any) {
+  //   dispatch(revokeAllAccessTeamManage(farmer))
+  // }
+
   if (farmersForTeamManage && teamNumbers) return (
-    <div>{farmersForTeamManage} farmers and
-      their {teamNumbers} teams ready for render</div>
+    <div className="outTableModal-wrapper">
+      {farmersForTeamManage} farmers and
+      their {teamNumbers} teams ready for render
+    </div>
   )
   return null
 }

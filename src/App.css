@@ -9,7 +9,8 @@
   max-height: 100vh;
 }
 
-/* ### MAIN TABLES ### */
+/* [START] */
+/* MAIN TABLES */
 .mainTables-wrapper {
   display: flex;
   flex-direction: column;
@@ -40,9 +41,11 @@
   overflow-x: scroll;
 }
 
-/* $$$ MAIN TABLES $$$ */
+/* MAIN TABLES */
+/* [FINISH] */
 
-/* ### PERIOD SELECTOR ### */
+/* [START] */
+/* PERIOD SELECTOR */
 .rdp {
   position: fixed;
   margin: -5px 0 0 0 !important;
@@ -65,4 +68,9 @@
   border-bottom-right-radius: 10px;
 }
 
-/* $$$ PERIOD SELECTOR $$$ */
+/* PERIOD SELECTOR */
+/* [FINISH] */
+
+.outTableModal-wrapper {
+  z-index: 200;
+}

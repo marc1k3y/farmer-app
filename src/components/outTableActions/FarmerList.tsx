@@ -15,7 +15,7 @@ const FarmerListModal = () => {
   console.log(farmers);
 
   if (farmers) return (
-    <div>{farmers} farmers ready for render</div>
+    <div className="outTableModal-wrapper">{farmers} farmers ready for render</div>
   )
   return null
 }
