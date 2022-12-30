@@ -10,6 +10,8 @@ export const PendingTable: React.FC<{ data: any }> = ({ data }) => {
   function setOrderId(id) {
     dispatch(setCurrentOrder(id))
   }
+  console.log(data);
+  
   if (data) return (
     <table className="one-table-of-mainTables">
       <thead>
