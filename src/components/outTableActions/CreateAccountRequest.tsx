@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import { useAppDispatch, useAppSelector } from "../../hooks/redux"
 import { createAccountRequest } from "../../http/accountRequestThunk"
 import { ApproveRequest } from "../approveRequest/ApproveRequest"
@@ -10,7 +10,8 @@ const CreateAccountRequestModal = ({ setModal, setApprove, setRequestBody }) => 
   const { accountTypes, currencies, locations } = useAppSelector(state => state.dropdowns)
   const { price, quantity, description } = useAppSelector(state => state.modal)
 
-  function submitHandler() {
+  function submitHandler(e: FormEvent) {
+    e.preventDefault()
     setRequestBody({
       price: parseFloat(price),
       quantity: parseInt(quantity),
@@ -24,12 +25,12 @@ const CreateAccountRequestModal = ({ setModal, setApprove, setRequestBody }) => 
   }
 
   return (
-    <form>
+    <form onSubmit={(e) => submitHandler(e)}>
       <PriceInput />
       <QuantityInput />
       <DecriptionInput />
       <Dropdowns />
-      <button onClick={submitHandler}>
+      <button>
         submit
       </button>
     </form>

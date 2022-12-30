@@ -36,3 +36,15 @@ export const fetchTableByStatus: any = createAsyncThunk(
     return data
   }
 )
+
+// actions
+export const sendCancelReason: any = createAsyncThunk(
+  "accountRequests/cancel",
+  async (orderId, denialReason) => {
+    const { data } = await $authHost.put("accountRequests/cancel", {
+      requestID: orderId,
+      cancellationCause: denialReason
+    })
+    return data
+  }
+)

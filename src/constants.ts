@@ -1,6 +1,12 @@
 // export const api = "https://g-go-farming.azurewebsites.net/v2/"
 export const api = "http://localhost/v2/"
 
+export enum Apps {
+	farmer,
+	tech,
+	creative
+}
+
 export const uid = {
 	roleId: localStorage.getItem("roleId"),
 	token: localStorage.getItem("token"),
