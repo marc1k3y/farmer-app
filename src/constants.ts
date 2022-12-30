@@ -2,9 +2,9 @@
 export const api = "http://localhost/v2/"
 
 export enum Apps {
-	farmer,
-	tech,
-	creative
+	farmer = "farmer",
+	tech = "tech",
+	creative = "creative"
 }
 
 export const uid = {

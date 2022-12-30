@@ -2,7 +2,7 @@ import { createSlice, Slice } from "@reduxjs/toolkit"
 import { Apps } from "../../constants"
 
 const initialState = {
-  app: Apps[0]
+  app: Apps.farmer
 }
 
 const AppSlice: Slice = createSlice({
@@ -16,3 +16,4 @@ const AppSlice: Slice = createSlice({
 })
 
 export default AppSlice.reducer
+export const { setApp } = AppSlice.actions
