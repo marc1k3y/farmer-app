@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "./hooks/redux"
 import { checkAuth } from "./http/authThunk"
 import { AuthPage } from "./pages/auth"
-import { MainPage } from "./pages/main/index"
+import { MainPage } from "./pages/farmer/index"
 
 const routes = {
   farmer: {
