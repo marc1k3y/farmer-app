@@ -10,7 +10,7 @@ import { TableNavigation } from "./TableNavigation"
 import { PendingTable, InWorkTable, CompletedTable, DeclinedTable } from "./tables/index"
 import { createPeriodForRequest } from "../../tools"
 
-export const MainTables = () => {
+export const MainTables = ({ enableAnimations }) => {
   const dispatch = useAppDispatch()
   const { pathname } = useLocation()
   const { period } = useAppSelector(state => state.mainTables)
@@ -33,19 +33,24 @@ export const MainTables = () => {
     dispatch(fetchTableByStatus(request))
   }, [dispatch, pathname, period])
 
-  if (loading) return <Loader />
-  // if (error) return <ErrorWindow message={error} />
-  return (
-    <div className="mainTables-wrapper">
-      <div className="mainTables-header">
-        <PeriodSelector />
-        <TableNavigation />
+  if (loading) {
+    enableAnimations(false)
+    return <Loader />
+  } else {
+    enableAnimations(true)
+    // if (error) return <ErrorWindow message={error} />
+    return (
+      <div className="mainTables-wrapper">
+        <div className="mainTables-header">
+          <PeriodSelector />
+          <TableNavigation />
+        </div>
+        <Routes>
+          {routes.map(route => (
+            <Route key={route.id} path={route.path} element={route.element} />
+          ))}
+        </Routes>
       </div>
-      <Routes>
-        {routes.map(route => (
-          <Route key={route.id} path={route.path} element={route.element} />
-        ))}
-      </Routes>
-    </div>
-  )
+    )
+  }
 }

@@ -4,6 +4,7 @@ import { DayPicker } from "react-day-picker"
 import { useAppDispatch, useAppSelector } from "../hooks/redux"
 import { setPeriod } from "../redux/slice/mainTablesSlice"
 import emptyCalendarSVG from "../assets/calendar.svg"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 export const PeriodSelector = () => {
   const dispatch = useAppDispatch()
@@ -12,6 +13,7 @@ export const PeriodSelector = () => {
   const today = new Date(timeElapsed)
   const monthDay = today.toLocaleDateString().split("/")[1]
   const { period } = useAppSelector(state => state.mainTables)
+  const [parent] = useAutoAnimate()
 
   function setPeriodHandler({ from, to }) {
     const payload = { from, to }
@@ -19,9 +21,10 @@ export const PeriodSelector = () => {
   }
 
   return (
-    <div style={{ position: "relative" }}>
+    // @ts-ignore
+    <div style={{ position: "relative" }} ref={parent}>
       <button onClick={() => setIsOpen(!isOpen)} style={{
-        backgroundColor: isOpen ? "gray" : "transparent", border: "none", borderTopLeftRadius: "10px", borderTopRightRadius: "10px"
+        border: "none", backgroundColor: "transparent"
       }}>
         <div style={{
           color: isOpen ? "white" : "black",
@@ -32,7 +35,7 @@ export const PeriodSelector = () => {
           src={emptyCalendarSVG}
           alt="empty-calendar-svg"
           width={40} height={40}
-          style={{ filter: isOpen ? `invert(48%) brightness(1000%) contrast(100%)` : "none" }} />
+          style={{ filter: isOpen ? `invert(50%) brightness(1000%) contrast(100%)` : "none" }} />
       </button>
       {isOpen
         && <DayPicker
